@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kix57j0.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kix57j0.mongodb.net/?retryWrites=true&w=majority?directConnection=true`;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -84,6 +84,9 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("running volunteer network server");
+});
+app.get("/s", (req, res) => {
+  res.send("something running on server");
 });
 
 app.listen(port, () => {
